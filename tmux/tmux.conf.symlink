@@ -1,0 +1,132 @@
+###########################
+#  Configuration
+###########################
+
+set -sg escape-time 0
+set -g repeat-time 1000
+set -g history-limit 20000
+
+set  -g renumber-windows on
+set  -g base-index 1
+setw -g pane-base-index 1
+setw -g aggressive-resize on
+
+set  -g bell-action any
+set  -g visual-activity on
+set  -g visual-bell off
+setw -g monitor-activity on
+
+set  -g mouse-utf8 on
+set  -g mouse on
+
+set  -g set-titles on
+set  -g set-titles-string "#T - #W"
+setw -g automatic-rename on
+
+set  -g status-keys vi
+setw -g mode-keys vi
+setw -g xterm-keys on
+
+setw -g utf8 on
+
+###########################
+#  Key Bindings
+###########################
+
+unbind C-b
+set -g prefix C-a
+bind C-a send-prefix
+bind a send-prefix
+
+bind r source-file ~/.tmux.conf \; display "Config Reloaded!"
+
+bind N new-window
+
+unbind %
+unbind '"'
+bind | split-window -h -c "#{pane_current_path}"
+bind - split-window -v -c "#{pane_current_path}"
+
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
+bind -r H resize-pane -L 10
+bind -r J resize-pane -D 10
+bind -r K resize-pane -U 10
+bind -r L resize-pane -R 10
+
+unbind =
+bind = select-layout tiled
+
+bind -r C-h select-window -t :-
+bind -r C-l select-window -t :+
+
+unbind [
+bind Escape copy-mode
+unbind p
+bind p paste-buffer
+bind -t vi-copy 'v' begin-selection
+bind -t vi-copy 'y' copy-selection
+
+# bind y setw synchronize-panes
+
+# unbind Up
+# bind Up new-window -d -n fullscreen \; swap-pane -s fullscreen.1 \; select-window -t fullscreen
+# unbind Down
+# bind Down last-window \; swap-pane -s fullscreen.1 \; kill-window -t fullscreen
+
+###########################
+# Colors
+###########################
+
+set -g default-terminal "xterm-256color"
+
+set -g pane-border-fg colour235
+set -g pane-border-bg black
+set -g pane-active-border-fg green
+set -g pane-active-border-bg black
+
+tm_icon="♟"
+tm_color_active=colour213
+tm_color_inactive=colour241
+tm_color_feature=colour037
+
+tm_separator_left_bold="◀"
+tm_separator_left_thin="❮"
+tm_separator_right_bold="▶"
+tm_separator_right_thin="❯"
+
+###########################
+# Status Bar
+###########################
+
+set -g status-utf8 on
+set -g status-interval 30
+set -g status-justify left
+set -g status-left-length 32
+set -g status-right-length 150
+set -g status-attr default
+set -g window-status-format "#I #W"
+tm_date="#[fg=$tm_color_inactive] %m/%d/%y %I:%M"
+tm_host="#[fg=$tm_color_feature,bold]#h"
+tm_session_name="#[fg=$tm_color_feature,bold]$tm_icon #S #I:#P"
+set  -g status-left $tm_session_name' '
+set  -g status-right $tm_date' '$tm_host
+setw -g  window-status-current-format "#[bold]#I #W"
+
+set  -g message-bg colour235
+set  -g status-bg colour235
+setw -g window-status-bg colour235
+setw -g window-status-current-bg colour235
+
+set  -g message-fg $tm_color_active
+set  -g status-fg $tm_color_active
+set  -g display-panes-active-colour $tm_color_active
+set  -g pane-active-border-fg $tm_color_active
+set  -g clock-mode-colour $tm_color_active
+setw -g window-status-current-fg $tm_color_active
+
+set  -g display-panes-colour $tm_color_inactive
+set  -g pane-border-fg $tm_color_inactive
+setw -g window-status-fg $tm_color_inactive
