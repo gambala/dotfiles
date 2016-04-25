@@ -1,2 +1,6 @@
-export PATH="./bin:/usr/local/bin:/usr/local/sbin:$ZSH/bin:$PATH"
+export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+export PATH="/usr/bin:/usr/sbin:$PATH"
+export PATH="/bin:/sbin:$PATH"
+export PATH="$HOME/bin:$HOME/.rvm/bin:$PATH"
+export PATH="$ZSH/bin:./bin:$PATH"
 export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
